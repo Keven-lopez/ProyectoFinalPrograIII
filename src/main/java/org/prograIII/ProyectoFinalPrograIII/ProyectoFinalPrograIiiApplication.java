@@ -1,5 +1,6 @@
 package org.prograIII.ProyectoFinalPrograIII;
 
+import umg.principal.EstructurasDeDatos.ColaDeTurnos;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

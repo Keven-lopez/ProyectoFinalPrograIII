@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.prograIII</groupId>
-	<artifactId>ProyectoFinalPrograIII</artifactId>
+	<artifactId>ProyectoFinal-main</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ProyectoFinalPrograIII</name>
 	<description>Demo project for Spring Boot</description>
@@ -67,6 +67,11 @@
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit-stream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
