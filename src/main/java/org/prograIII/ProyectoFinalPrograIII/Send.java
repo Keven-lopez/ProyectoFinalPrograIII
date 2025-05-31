@@ -11,9 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class Send {
-    static final String topicExchangeName = "spring-boot-exchange";
+    /*static final String topicExchangeName = "spring-boot-exchange";
 
     static final String queueName = "spring-boot";
 
@@ -49,6 +49,6 @@ public class Send {
 
     public static void main(String[] args) throws InterruptedException {
         SpringApplication.run(Send.class, args).close();
-    }
+    }*/
 
 }
