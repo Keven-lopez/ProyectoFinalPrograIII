@@ -1,17 +1,18 @@
-package org.prograIII.ProyectoFinalPrograIII.Services;
+package org.prograIII.ProyectoFinalPrograIII.API.Services;
 
-import org.prograIII.ProyectoFinalPrograIII.Database.Entities.TurnoEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import umg.principal.Database.Entities.TurnoEntity;
 import org.springframework.stereotype.Service;
 import umg.principal.EstructurasDeDatos.ColaDeTurnos;
-import org.prograIII.ProyectoFinalPrograIII.Database.Repositories.TurnoRepository;
+import umg.principal.Database.Repositories.TurnoRepository;
 import umg.principal.Models.Turno;
 import umg.principal.EstructurasDeDatos.PilaDeAcciones;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class TurnoService {
+    Logger logger = Logger.getLogger(TurnoService.class.getName());
     private final TurnoRepository turnoRepository;
     private final ColaDeTurnos cola;
     private final PilaDeAcciones pila;
@@ -31,13 +32,13 @@ public class TurnoService {
         TurnoEntity turnoEntity = mapToEntity(turno);
         turnoRepository.save(turnoEntity);
 
-        System.out.println("Turno encolado: " + turnoEntity);
+        logger.info("Turno encolado: " + turnoEntity);
     }
 
     public TurnoEntity processNextTurno() {
         Turno next = cola.quitar();
         if (next == null) {
-            System.out.println("No hay turnos en cola.");
+            logger.warning("No hay turnos en cola.");
             return null;
         }
 
@@ -46,7 +47,7 @@ public class TurnoService {
         TurnoEntity entity = mapToEntity(next);
         turnoRepository.save(entity);
 
-        System.out.println("Turno atendido y guardado: " + next);
+        logger.info("Turno atendido y guardado: " + next);
         return mapToEntity(next);
     }
 
@@ -61,7 +62,7 @@ public class TurnoService {
             Turno turno = mapToModel(entity);
             cola.insertar(turno);
             pila.insertar(turno);
-            System.out.println("Turno cargado en cola: " + turno);
+            logger.info("Turno cargado en cola: " + turno);
         }
     }
 
@@ -69,10 +70,10 @@ public class TurnoService {
         if (turnoRepository.existsById(id)) {
             turnoRepository.deleteById(id);
             cola.deleteById(id);
-            System.out.println("Turno eliminado con ID: " + id);
+            logger.info("Turno eliminado con ID: " + id);
             return true;
         } else {
-            System.out.println("Turno no encontrado con ID: " + id);
+            logger.warning("Turno no encontrado con ID: " + id);
             return false;
         }
     }

@@ -1,16 +1,18 @@
-package org.prograIII.ProyectoFinalPrograIII.Services;
+package org.prograIII.ProyectoFinalPrograIII.API.Services;
 
-import org.prograIII.ProyectoFinalPrograIII.Database.Repositories.HistorialRepository;
+import java.util.logging.Logger;
+import umg.principal.Database.Repositories.HistorialRepository;
 import org.springframework.stereotype.Service;
 import umg.principal.EstructurasDeDatos.ListaHistorial;
 import umg.principal.Models.Historial;
-import org.prograIII.ProyectoFinalPrograIII.Database.Entities.HistorialEntity;
+import umg.principal.Database.Entities.HistorialEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class HistorialService {
+    Logger logger = Logger.getLogger(HistorialService.class.getName());
     private final HistorialRepository historialRepository;
     private final ListaHistorial lista;
 
@@ -28,11 +30,11 @@ public class HistorialService {
 
         HistorialEntity historialEntity = mapToHistorial(historial);
         historialRepository.save(historialEntity);
-        System.out.println(historial);
+        logger.info(historialEntity.toString());
     }
 
     public void showHistorial(){
-        System.out.println(lista.getAll());
+        logger.info(lista.getAll().toString());
     }
 
     public void loadFromDB(){
@@ -40,6 +42,7 @@ public class HistorialService {
         for(HistorialEntity historialEntity : historialEntities){
             lista.addHistorial(historialEntity);
         }
+        logger.info("Historial Cargado");
     }
 
     private HistorialEntity mapToHistorial(Historial historial) {
